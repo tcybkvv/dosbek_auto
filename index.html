@@ -3,12 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Dosbek</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bundle.css">
 </head>
 <body>
-    <h1>Посты из JSON на GitHub</h1>
-    <div id="loader" class="loader"></div>
-    <div id="container"></div>
+    <div class="wrapper">
+        <header class="menu">
+            <div class="container">
+                <div class="menu__inner">
+                    <a href="" class="menu__icon">
+                        <img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-logo-footer.png" alt="Electronics">
+                    </a>
+                    <nav class="menu__nav">
+                        <ul>
+                            <li><a href="" class="menu__title--first">Lorem</a></li>
+                            <li><a href="" class="menu__title--first">Lorem</a></li>
+                            <li><a href="" class="menu__title--first">Lorem</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="main">
+            <div class="container">
+                <h1>Посты из JSON на GitHub</h1>
+                <div id="main__container">Загрузка...</div>
+            </div>
+        </section>
+    </div>
 </body>
 <script src="main.js"></script>
 </html>
