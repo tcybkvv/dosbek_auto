@@ -1,25 +1,134 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  font-family: "Arial", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  scroll-behavior: smooth;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .container {
-  width: 1300px;
-  margin: 0 auto;
+    width: 1300px;
+    margin: 0 auto;
 }
+
+// Стили скроллбара
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #df0000;
+    transition: 400ms;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #af0000;
+}
+
+// LOADER
+//
+//.loader {
+//    position: fixed;
+//    top: 0;
+//    left: 0;
+//    width: 100vw;
+//    height: 100vh;
+//    background: rgba(255, 255, 255, 0.95);
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    z-index: 99;
+//    transition: opacity 0.3s ease;
+//}
+//
+//.car {
+//    &__body {
+//        animation: shake 0.2s ease-in-out infinite alternate;
+//    }
+//
+//    &__line {
+//        transform-origin: center right;
+//        stroke-dasharray: 22;
+//        animation: line 0.8s ease-in-out infinite;
+//        animation-fill-mode: both;
+//
+//        &--top {
+//            animation-delay: 0s;
+//        }
+//
+//        &--middle {
+//            animation-delay: 0.2s;
+//        }
+//
+//        &--bottom {
+//            animation-delay: 0.4s;
+//        }
+//    }
+//}
+//
+//@keyframes shake {
+//    0% {
+//        transform: translateY(-1%);
+//    }
+//    100% {
+//        transform: translateY(3%);
+//    }
+//}
+//
+//@keyframes line {
+//    0% {
+//        stroke-dashoffset: 22;
+//    }
+//
+//    25% {
+//        stroke-dashoffset: 22;
+//    }
+//
+//    50% {
+//        stroke-dashoffset: 0;
+//    }
+//
+//    51% {
+//        stroke-dashoffset: 0;
+//    }
+//
+//    80% {
+//        stroke-dashoffset: -22;
+//    }
+//
+//    100% {
+//        stroke-dashoffset: -22;
+//    }
+//}
+

@@ -1,9 +1,11 @@
+@import "core";
+
 // HEADER
 
 .menu {
     width: 100vw;
     padding: 10px 0;
-    background-color: #191919;
+    background: #2e2727;
     z-index: 9;
 
     &__inner {
@@ -18,63 +20,7 @@
         width: 300px;
 
         img {
-            transition: transform 0.3s ease;
             width: 300px;
-        }
-
-        &:hover img {
-            transform: scale(1.03);
-        }
-    }
-
-    &__nav {
-        display: flex;
-        align-items: center;
-
-        ul {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-
-            li {
-                position: relative;
-                transition: transform 0.3s ease;
-
-                &:hover {
-                    transform: scale(1.1);
-                }
-            }
-        }
-    }
-
-    &__title--first {
-        color: #fff;
-        font-size: 16px;
-        font-weight: 500;
-        position: relative;
-        display: inline-block;
-        transition: color 0.3s ease;
-
-        &::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -6px;
-            left: 0;
-            background: linear-gradient(to right, #ff7a7a, #b60000);
-            transition: width 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        &:hover,
-        &:focus {
-            color: #ff4d4d;
-            outline: none;
-
-            &::after {
-                width: 100%;
-                box-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
-            }
         }
     }
 }
@@ -82,29 +28,294 @@
 
 // MAIN
 
-h1 {
-    margin-top: 20px;
-    margin-bottom: 20px;
+.main {
+    flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
-.card {
+#cars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 34px;
+}
+
+.car-card {
     background: white;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+    width: 23%;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
 }
 
-.card h2 {
-    margin: 0 0 10px;
+.car-card:hover {
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
+    transform: scale(1.03);
 }
 
-.card p {
-    margin: 0;
+.car-card img {
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    height: 150px;
 }
 
-.tags {
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: #666;
+.car-name {
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    text-align: center;
+}
+
+.car-price {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.main__sort {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#sortSelect {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #df0000;
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: none;
+    background-color: #ccc;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #b5b5b5;
+}
+
+.pagination button:disabled {
+    background-color: #df0000;
+    cursor: default;
+}
+
+.details-view .main__sort,
+.details-view .pagination {
+    display: none;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.carousel .images {
+    overflow: hidden;
+}
+
+.carousel img {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.carousel img.active {
+    display: block;
+}
+
+.carousel button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.carousel button:first-child {
+    left: 10px;
+}
+
+.carousel button:last-child {
+    right: 10px;
+}
+
+.car-details-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.car-details p {
+    margin: 5px 0;
+}
+
+//FOOTER
+
+.footer {
+    background: #2e2727;
+    padding: 40px 0;
+
+    &__items {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    &__about__site {
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .footer__icon__img {
+            max-width: 300px;
+            height: auto;
+        }
+
+        .footer__description {
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    }
+
+    &__contact,
+    &__social {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    &__contact {
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        &__icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        a {
+            color: #b3b3b3;
+            font-size: 14px;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #ffffff;
+            }
+        }
+    }
+
+    &__social {
+        &__links {
+            display: flex;
+            gap: 15px;
+        }
+
+        &__icon {
+            width: 25px;
+            transition: 0.3s;
+        }
+
+        &__link:hover .footer__social__icon {
+            transform: scale(1.1);
+        }
+    }
+
+    &__line {
+        height: 1px;
+        background-color: #333333;
+        margin: 20px 0;
+    }
+
+    &__copyright {
+        text-align: center;
+        color: #666666;
+        font-size: 14px;
+    }
 }
