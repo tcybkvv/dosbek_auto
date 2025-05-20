@@ -53,13 +53,17 @@ const showCarDetails = (car) => {
     main.classList.add("details-view");
     const container = document.getElementById("cars");
     container.innerHTML = "";
+    container.style.display = "block";
 
     const detailsContainer = document.createElement("div");
     detailsContainer.className = "car-details-container";
 
     const backButton = document.createElement("button");
     backButton.textContent = "Вернуться";
-    backButton.onclick = () => renderCars();
+    backButton.onclick = () => {
+        renderCars(),
+            container.style.display = "flex"
+    };
 
     const carousel = document.createElement("div");
     carousel.className = "carousel";
@@ -73,9 +77,9 @@ const showCarDetails = (car) => {
     });
 
     const prevButton = document.createElement("button");
-    prevButton.textContent = "Previous";
+    prevButton.textContent = "<";
     const nextButton = document.createElement("button");
-    nextButton.textContent = "Next";
+    nextButton.textContent = ">";
 
     let currentIndex = 0;
     const showNext = () => {
@@ -145,3 +149,7 @@ fetch("https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/dat
         renderCars();
     })
     .catch(err => console.error("Ошибка загрузки JSON:", err));
+
+//FOOTER DATE
+
+document.getElementById("year").textContent = new Date().getFullYear();

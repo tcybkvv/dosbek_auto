@@ -1,11 +1,10 @@
 @import "core";
 
-// HEADER
-
+/* HEADER */
 .menu {
     width: 100vw;
     padding: 10px 0;
-    background: #2e2727;
+    background: var(--background-secondary);
     z-index: 9;
 
     &__inner {
@@ -25,13 +24,10 @@
     }
 }
 
-
-// MAIN
-
+/* MAIN */
 .main {
     flex: 1;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin: 50px 0;
 }
 
 #cars {
@@ -41,9 +37,9 @@
 }
 
 .car-card {
-    background: white;
+    background: var(--card-background);
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.2);
+    box-shadow: 0 2px 6px var(--shadow-color);
     width: 23%;
     cursor: pointer;
     transition: 0.3s;
@@ -51,29 +47,25 @@
     flex-direction: column;
     align-items: center;
     padding: 10px;
-}
 
-.car-card:hover {
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.5);
-    transform: scale(1.03);
-}
+    &:hover {
+        box-shadow: 0 2px 6px var(--shadow-hover);
+        transform: scale(1.03);
+    }
 
-.car-card img {
-    width: 100%;
-    border-radius: 6px;
-    object-fit: cover;
-    height: 150px;
+    img {
+        width: 100%;
+        border-radius: 6px;
+        object-fit: cover;
+        height: 150px;
+    }
 }
 
 .car-name {
     font-weight: bold;
-    margin: 10px 0 5px 0;
+    margin: 10px 0 5px;
     text-align: center;
-}
-
-.car-price {
-    color: #007bff;
-    font-weight: 600;
+    color: var(--text-primary);
 }
 
 .main__sort {
@@ -81,13 +73,15 @@
     display: flex;
     align-items: center;
     gap: 20px;
-}
 
-#sortSelect {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+    #sortSelect {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        font-size: 14px;
+        background: var(--card-background);
+        color: var(--text-primary);
+    }
 }
 
 .toggle-container {
@@ -101,125 +95,159 @@
     display: inline-block;
     width: 42px;
     height: 24px;
-}
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
 }
 
 .slider {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0;
-    right: 0; bottom: 0;
-    background-color: #ccc;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--border-color);
     transition: 0.3s;
     border-radius: 34px;
-}
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px; width: 18px;
-    left: 3px; bottom: 3px;
-    background-color: white;
-    transition: 0.3s;
-    border-radius: 50%;
+    &:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: var(--card-background);
+        transition: 0.3s;
+        border-radius: 50%;
+    }
 }
 
 input:checked + .slider {
-    background-color: #df0000;
-}
+    background-color: var(--accent-color);
 
-input:checked + .slider:before {
-    transform: translateX(18px);
+    &:before {
+        transform: translateX(18px);
+    }
 }
 
 .pagination {
     margin-top: 20px;
     text-align: center;
+
+    button {
+        padding: 6px 12px;
+        margin: 0 5px;
+        border: none;
+        background-color: var(--border-color);
+        color: var(--text-primary);
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+
+        &:hover {
+            background-color: var(--accent-color-hover);
+        }
+
+        &:disabled {
+            background-color: var(--accent-color);
+            cursor: default;
+        }
+    }
 }
 
-.pagination button {
-    padding: 6px 12px;
-    margin: 0 5px;
-    border: none;
-    background-color: #ccc;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.pagination button:hover {
-    background-color: #b5b5b5;
-}
-
-.pagination button:disabled {
-    background-color: #df0000;
-    cursor: default;
-}
-
-.details-view .main__sort,
-.details-view .pagination {
-    display: none;
+.details-view {
+    .main__sort,
+    .pagination {
+        display: none;
+    }
 }
 
 .carousel {
     position: relative;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.carousel .images {
+    width: 600px;
+    height: 300px;
+    border-radius: 10px;
     overflow: hidden;
-}
 
-.carousel img {
-    display: none;
-    width: 100%;
-    height: auto;
-}
+    img {
+        display: none;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
 
-.carousel img.active {
-    display: block;
-}
+        &.active {
+            display: block;
+        }
+    }
 
-.carousel button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+    button {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        font-size: 18px;
+        color: var(--text-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-50%);
+        background: var(--accent-color);
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background 0.3s, opacity 0.3s;
+        opacity: 0.5;
 
-.carousel button:first-child {
-    left: 10px;
-}
+        &:hover {
+            background: var(--accent-color-hover);
+            opacity: 1;
+        }
 
-.carousel button:last-child {
-    right: 10px;
+        &:first-child {
+            left: 10px;
+        }
+
+        &:last-child {
+            right: 10px;
+        }
+    }
 }
 
 .car-details-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 50px;
 }
 
-.car-details p {
-    margin: 5px 0;
+.car-details {
+    p {
+        margin: 5px 0;
+        color: var(--text-primary);
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        color: var(--card-background);
+        cursor: pointer;
+        background-color: var(--accent-color);
+        transition: background 0.3s;
+
+        &:hover {
+            background-color: var(--accent-color-hover);
+        }
+    }
 }
 
-//FOOTER
-
+/* FOOTER */
 .footer {
-    background: #2e2727;
+    background: var(--background-secondary);
     padding: 40px 0;
 
     &__items {
@@ -241,7 +269,7 @@ input:checked + .slider:before {
         }
 
         .footer__description {
-            color: #b3b3b3;
+            color: var(--text-secondary);
             font-size: 14px;
             line-height: 1.6;
         }
@@ -259,7 +287,7 @@ input:checked + .slider:before {
         font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 10px;
-        color: #ffffff;
+        color: var(--card-background);
     }
 
     &__contact {
@@ -281,12 +309,12 @@ input:checked + .slider:before {
         }
 
         a {
-            color: #b3b3b3;
+            color: var(--text-secondary);
             font-size: 14px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
 
             &:hover {
-                color: #ffffff;
+                color: var(--accent-color-hover);
             }
         }
     }
@@ -299,23 +327,25 @@ input:checked + .slider:before {
 
         &__icon {
             width: 25px;
-            transition: 0.3s;
+            transition: transform 0.3s;
         }
 
-        &__link:hover .footer__social__icon {
-            transform: scale(1.1);
+        &__link:hover & {
+            &__icon {
+                transform: scale(1.1);
+            }
         }
     }
 
     &__line {
         height: 1px;
-        background-color: #333333;
+        background-color: var(--text-primary);
         margin: 20px 0;
     }
 
     &__copyright {
         text-align: center;
-        color: #666666;
+        color: var(--text-secondary);
         font-size: 14px;
     }
 }

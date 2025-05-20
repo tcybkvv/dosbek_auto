@@ -1,3 +1,16 @@
+:root {
+    --background-primary: #ffffff; /* Основной фон (белый) */
+    --background-secondary: #2e2727; /* Для хедера и футера */
+    --card-background: #ffffff; /* Фон карточек */
+    --text-primary: #333333; /* Основной текст */
+    --text-secondary: #b3b3b3; /* Вторичный текст (футер, описания) */
+    --accent-color: #e63946; /* Акцентный цвет (кнопки, активные элементы) */
+    --accent-color-hover: #d0002f; /* Ховер для акцентного цвета */
+    --border-color: #cccccc; /* Границы, неактивные кнопки */
+    --shadow-color: rgba(0, 0, 0, 0.2); /* Тень */
+    --shadow-hover: rgba(0, 0, 0, 0.5); /* Тень при ховере */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +33,7 @@ html, body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background: var(--background-primary);
 }
 
 ul {
@@ -35,100 +49,22 @@ a {
     margin: 0 auto;
 }
 
-// Стили скроллбара
-
+/* Стили скроллбара */
 ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-    background: white;
+    background: var(--background-primary);
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    background: #df0000;
-    transition: 400ms;
+    background: var(--accent-color);
+    transition: background 0.4s;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #af0000;
+    background: var(--accent-color-hover);
 }
-
-// LOADER
-//
-//.loader {
-//    position: fixed;
-//    top: 0;
-//    left: 0;
-//    width: 100vw;
-//    height: 100vh;
-//    background: rgba(255, 255, 255, 0.95);
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    z-index: 99;
-//    transition: opacity 0.3s ease;
-//}
-//
-//.car {
-//    &__body {
-//        animation: shake 0.2s ease-in-out infinite alternate;
-//    }
-//
-//    &__line {
-//        transform-origin: center right;
-//        stroke-dasharray: 22;
-//        animation: line 0.8s ease-in-out infinite;
-//        animation-fill-mode: both;
-//
-//        &--top {
-//            animation-delay: 0s;
-//        }
-//
-//        &--middle {
-//            animation-delay: 0.2s;
-//        }
-//
-//        &--bottom {
-//            animation-delay: 0.4s;
-//        }
-//    }
-//}
-//
-//@keyframes shake {
-//    0% {
-//        transform: translateY(-1%);
-//    }
-//    100% {
-//        transform: translateY(3%);
-//    }
-//}
-//
-//@keyframes line {
-//    0% {
-//        stroke-dashoffset: 22;
-//    }
-//
-//    25% {
-//        stroke-dashoffset: 22;
-//    }
-//
-//    50% {
-//        stroke-dashoffset: 0;
-//    }
-//
-//    51% {
-//        stroke-dashoffset: 0;
-//    }
-//
-//    80% {
-//        stroke-dashoffset: -22;
-//    }
-//
-//    100% {
-//        stroke-dashoffset: -22;
-//    }
-//}
-
