@@ -2,13 +2,21 @@
     --background-primary: #ffffff; /* Основной фон (белый) */
     --background-secondary: #2e2727; /* Для хедера и футера */
     --card-background: #ffffff; /* Фон карточек */
-    --text-primary: #333333; /* Основной текст */
+    --text-primary: #000000; /* Основной текст */
     --text-secondary: #b3b3b3; /* Вторичный текст (футер, описания) */
-    --accent-color: #e63946; /* Акцентный цвет (кнопки, активные элементы) */
-    --accent-color-hover: #d0002f; /* Ховер для акцентного цвета */
+    --text-tertiary: #ffffff; /* Третичный текст (для контраста) */
+    --accent-color: #ef320f; /* Акцентный цвет (кнопки, активные элементы) */
+    --accent-color-hover: #c10000; /* Ховер для акцентного цвета */
     --border-color: #cccccc; /* Границы, неактивные кнопки */
     --shadow-color: rgba(0, 0, 0, 0.2); /* Тень */
     --shadow-hover: rgba(0, 0, 0, 0.5); /* Тень при ховере */
+}
+
+.dark-theme {
+    --background-primary: #1a1a1a; /* Тёмный фон */
+    --card-background: #2d2d2d; /* Тёмный фон карточек */
+    --text-primary: #e0e0e0; /* Основной текст в тёмной теме (лёгкий серый для читаемости) */
+    --border-color: #444444; /* Границы в тёмной теме */
 }
 
 * {
@@ -18,11 +26,12 @@
 }
 
 html {
-    font-family: "Arial", sans-serif;
+    font-family: "Geometria", sans-serif;
     font-size: 14px;
     font-weight: 400;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    background: var(--background-primary);
 }
 
 html, body {
@@ -67,4 +76,80 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-color-hover);
+}
+
+// LOADER
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    transition: opacity 0.3s ease;
+}
+
+.car {
+    &__body {
+        animation: shake 0.2s ease-in-out infinite alternate;
+    }
+
+    &__line {
+        transform-origin: center right;
+        stroke-dasharray: 22;
+        animation: line 0.8s ease-in-out infinite;
+        animation-fill-mode: both;
+
+        &--top {
+            animation-delay: 0s;
+        }
+
+        &--middle {
+            animation-delay: 0.2s;
+        }
+
+        &--bottom {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(-1%);
+    }
+    100% {
+        transform: translateY(3%);
+    }
+}
+
+@keyframes line {
+    0% {
+        stroke-dashoffset: 22;
+    }
+
+    25% {
+        stroke-dashoffset: 22;
+    }
+
+    50% {
+        stroke-dashoffset: 0;
+    }
+
+    51% {
+        stroke-dashoffset: 0;
+    }
+
+    80% {
+        stroke-dashoffset: -22;
+    }
+
+    100% {
+        stroke-dashoffset: -22;
+    }
 }

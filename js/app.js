@@ -4,6 +4,8 @@ let currentData = [];
 let originalData = [];
 let inDollars = false;
 
+const loader = document.querySelector(".loader");
+
 const renderCars = () => {
     const main = document.querySelector(".main");
     main.classList.remove("details-view");
@@ -16,7 +18,7 @@ const renderCars = () => {
         card.className = "car-card";
         card.innerHTML = `
             <img src="${car.photos[0]}" alt="${car.name}">
-            <h3>${car.name}</h3>
+            <h3 class="car-name">${car.name}</h3>
             <p>${formatPrice(car.price)}</p>
         `;
         card.onclick = () => showCarDetails(car);
@@ -41,7 +43,7 @@ const renderPagination = () => {
 
 const formatPrice = (price) => {
     if (inDollars) {
-        const usdPrice = Math.round(price / 89);
+        const usdPrice = Math.round(price / 87.45);
         return usdPrice.toLocaleString('ru-RU') + ' usd';
     } else {
         return price.toLocaleString('ru-RU') + ' сом';
@@ -61,8 +63,8 @@ const showCarDetails = (car) => {
     const backButton = document.createElement("button");
     backButton.textContent = "Вернуться";
     backButton.onclick = () => {
-        renderCars(),
-            container.style.display = "flex"
+        renderCars();
+        container.style.display = "flex";
     };
 
     const carousel = document.createElement("div");
@@ -76,10 +78,13 @@ const showCarDetails = (car) => {
         imagesContainer.appendChild(img);
     });
 
-    const prevButton = document.createElement("button");
-    prevButton.textContent = "<";
-    const nextButton = document.createElement("button");
-    nextButton.textContent = ">";
+    const prevButton = document.createElement("div");
+    prevButton.className = "carousel-button prev";
+    prevButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/a174cb2076798dee7339bbe9167855160752de47/images/icon-left-arrow.svg" alt="leftButton"/>`;
+
+    const nextButton = document.createElement("div");
+    nextButton.className = "carousel-button next";
+    nextButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/a174cb2076798dee7339bbe9167855160752de47/images/icon-right-arrow.svg" alt="rightButton"/>`;
 
     let currentIndex = 0;
     const showNext = () => {
@@ -141,6 +146,8 @@ toggle.onchange = () => {
     renderCars();
 };
 
+loader.style.display = "flex";
+
 fetch("https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/data/cars.json")
     .then(res => res.json())
     .then(json => {
@@ -148,7 +155,30 @@ fetch("https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/dat
         currentData = originalData.slice();
         renderCars();
     })
-    .catch(err => console.error("Ошибка загрузки JSON:", err));
+    .catch(err => console.error("Ошибка загрузки JSON:", err))
+    .finally(() => {
+        loader.style.display = "none";
+    });
+
+// TOGGLE THEME
+
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = document.getElementById('themeToggle');
+
+    if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark-theme');
+        themeToggle.checked = true;
+    }
+
+    themeToggle.addEventListener('change', () => {
+        document.documentElement.classList.toggle('dark-theme');
+        if (document.documentElement.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
+});
 
 //FOOTER DATE
 
