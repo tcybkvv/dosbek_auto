@@ -94,7 +94,7 @@
 /* MAIN */
 .main {
     flex: 1;
-    margin: 50px 0;
+    margin: 20px 0;
 }
 
 #cars {
@@ -472,12 +472,14 @@ input:checked + .slider {
 
 @media (max-width: 1024px) {
     .menu__icon {
-        width: 200px;
+        width: 250px;
     }
 
     .car-card {
         width: calc(50% - 17px);
     }
+
+
 
     .footer__items {
         flex-direction: column;
@@ -497,7 +499,7 @@ input:checked + .slider {
 
     .car-details-container {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 }
 
@@ -507,7 +509,7 @@ input:checked + .slider {
     }
 
     .menu__icon {
-        width: 170px;
+        width: 200px;
     }
 
     .main__sort {
@@ -534,7 +536,7 @@ input:checked + .slider {
 
     .car-details-container {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .car-details h2 {
