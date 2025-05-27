@@ -80,11 +80,11 @@ const showCarDetails = (car) => {
 
     const prevButton = document.createElement("div");
     prevButton.className = "carousel-button prev";
-    prevButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/a174cb2076798dee7339bbe9167855160752de47/images/icon-left-arrow.svg" alt="leftButton"/>`;
+    prevButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-left-arrow.svg" alt="leftButton"/>`;
 
     const nextButton = document.createElement("div");
     nextButton.className = "carousel-button next";
-    nextButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/a174cb2076798dee7339bbe9167855160752de47/images/icon-right-arrow.svg" alt="rightButton"/>`;
+    nextButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-right-arrow.svg" alt="rightButton"/>`;
 
     let currentIndex = 0;
     const showNext = () => {
