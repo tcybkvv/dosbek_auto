@@ -61,7 +61,7 @@ const showCarDetails = (car) => {
     detailsContainer.className = "car-details-container";
 
     const backButton = document.createElement("button");
-    backButton.textContent = "Вернуться";
+    backButton.innerHTML = `<img src = "https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-arrow-back.svg" alt = "Back icon"> Вернуться`;
     backButton.onclick = () => {
         renderCars();
         container.style.display = "flex";

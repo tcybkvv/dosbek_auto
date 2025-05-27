@@ -1,4 +1,3 @@
-/* Переменные */
 :root {
     --background-primary: #ffffff;
     --background-secondary: #2e2727;
@@ -11,6 +10,7 @@
     --border-color: #cccccc;
     --shadow-color: rgba(0, 0, 0, 0.2);
     --shadow-hover: rgba(0, 0, 0, 0.5);
+    --scrollbar-background: #dadada;
 }
 
 .dark-theme {
@@ -18,9 +18,9 @@
     --card-background: #2d2d2d;
     --text-primary: #e0e0e0;
     --border-color: #444444;
+    --scrollbar-background: #303030;
 }
 
-/* Сброс стилей и базовые настройки */
 * {
     margin: 0;
     padding: 0;
@@ -63,13 +63,14 @@ a {
 }
 
 /* Стили скроллбара */
+
 ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--background-primary);
+    background: var(--scrollbar-background);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -83,6 +84,7 @@ a {
 }
 
 /* LOADER */
+
 .loader {
     position: fixed;
     top: 0;
