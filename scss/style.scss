@@ -282,7 +282,13 @@ input:checked + .slider {
         align-items: center;
         transform: translateY(-50%);
         cursor: pointer;
+        background-color:  var(--accent-color);
+        border-radius: 50%;
         transition: 0.3s;
+
+        &:hover {
+            background-color: var(--accent-color-hover);
+        }
 
         img {
             display: block;
@@ -561,7 +567,7 @@ input:checked + .slider {
 
     .carousel {
         max-width: 100%;
-        height: 480px; /* Увеличена высота с 420px до 480px */
+        height: 480px;
 
         .images img {
             height: 100%;
@@ -570,7 +576,7 @@ input:checked + .slider {
         }
 
         .carousel-button {
-            width: 45px; /* Увеличены кнопки с 40px до 45px */
+            width: 45px;
             height: 45px;
 
             img {
@@ -579,7 +585,7 @@ input:checked + .slider {
             }
 
             &.prev {
-                left: 15px; /* Увеличен отступ с 10px до 15px */
+                left: 15px;
             }
 
             &.next {
@@ -769,13 +775,13 @@ input:checked + .slider {
     }
 
     .pagination button {
-        padding: 4px 6px;
-        margin: 0 1px;
-        font-size: 11px;
+        padding: 4px 9px;
+        margin: 0 3px;
+        font-size: 12px;
     }
 
     .carousel {
-        height: 220px; /* Уменьшена высота с 300px до 220px */
+        height: 220px;
         max-width: 100%;
 
         .images img {
@@ -785,7 +791,7 @@ input:checked + .slider {
         }
 
         .carousel-button {
-            width: 30px; /* Уменьшены кнопки с 35px до 30px */
+            width: 30px;
             height: 30px;
 
             img {
@@ -838,6 +844,23 @@ input:checked + .slider {
         text-align: center;
     }
 
+    .footer__icon__img {
+        width: 250px;
+    }
+
+    .footer__about__site .footer__description {
+        font-size: 12px;
+    }
+
+    .footer__contact a,
+    .footer__copyright {
+        font-size: 12px;
+    }
+
+    .footer__title {
+        font-size: 16px;
+    }
+
     .footer__contact {
         gap: 5px;
 
@@ -848,10 +871,9 @@ input:checked + .slider {
     }
 }
 
-/* Дополнительный медиа-запрос для очень маленьких экранов */
 @media (max-width: 360px) {
     .carousel {
-        height: 200px; /* Ещё меньше для совсем маленьких экранов */
+        height: 200px;
 
         .carousel-button {
             width: 28px;
