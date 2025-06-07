@@ -61,10 +61,18 @@ const showCarDetails = (car) => {
     detailsContainer.className = "car-details-container";
 
     const backButton = document.createElement("button");
-    backButton.innerHTML = `<img src = "https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-arrow-back.svg" alt = "Back icon"> Вернуться`;
+    backButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-arrow-back.svg" alt="Back icon"> Вернуться`;
     backButton.onclick = () => {
         renderCars();
         container.style.display = "flex";
+    };
+
+    const textButton = document.createElement("button");
+    textButton.innerHTML = `<img src="https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/images/icon-text.svg" alt="Text icon"> Написать`;
+    textButton.onclick = () => {
+        const phoneNumber = "+996502101215";
+        const message = encodeURIComponent(`Здравствуйте! Интересует ${car.name} за ${formatPrice(car.price)}.`);
+        window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`, "_blank");
     };
 
     const carousel = document.createElement("div");
@@ -121,30 +129,63 @@ const showCarDetails = (car) => {
         <p><b>Двигатель:</b> ${car.engine}</p>
         <p><b>Состояние:</b> ${car.condition}</p>
     `;
+    details.appendChild(textButton);
     details.appendChild(backButton);
     detailsContainer.appendChild(details);
 
     container.appendChild(detailsContainer);
 };
 
-const sortSelect = document.getElementById("sortSelect");
-sortSelect.onchange = () => {
+const updateCars = () => {
     const sortValue = sortSelect.value;
-    if (sortValue === "default") {
-        currentData = originalData.slice();
-    } else if (sortValue === "asc") {
-        currentData = originalData.slice().sort((a, b) => a.price - b.price);
-    } else if (sortValue === "desc") {
-        currentData = originalData.slice().sort((a, b) => b.price - a.price);
+    const brandValue = brandSelect.value;
+    const priceMin = parseFloat(priceMinInput.value) || 0;
+    const priceMax = parseFloat(priceMaxInput.value) || Infinity;
+
+    currentData = originalData.slice();
+
+    if (brandValue !== "all") {
+        currentData = currentData.filter(car => car.name.split(" ")[0] === brandValue);
     }
+
+    currentData = currentData.filter(car => {
+        const price = inDollars ? Math.round(car.price / 87.45) : car.price;
+        return price >= priceMin && price <= priceMax;
+    });
+
+    if (sortValue === "asc") {
+        currentData.sort((a, b) => a.price - b.price);
+    } else if (sortValue === "desc") {
+        currentData.sort((a, b) => b.price - a.price);
+    } else if (sortValue === "brand-asc") {
+        currentData.sort((a, b) => a.name.split(" ")[0].localeCompare(b.name.split(" ")[0]));
+    } else if (sortValue === "brand-desc") {
+        currentData.sort((a, b) => b.name.split(" ")[0].localeCompare(a.name.split(" ")[0]));
+    }
+
+    currentPage = 1;
     renderCars();
 };
 
+// Проверка наличия элементов перед установкой обработчиков
+const sortSelect = document.getElementById("sortSelect");
+if (sortSelect) sortSelect.onchange = updateCars;
+
+const brandSelect = document.getElementById("brandSelect");
+if (brandSelect) brandSelect.onchange = updateCars;
+
+const priceMinInput = document.getElementById("priceMin");
+if (priceMinInput) priceMinInput.oninput = updateCars;
+
+const priceMaxInput = document.getElementById("priceMax");
+if (priceMaxInput) priceMaxInput.oninput = updateCars;
+
 const toggle = document.getElementById("currencyToggle");
-toggle.onchange = () => {
+if (toggle) toggle.onchange = () => {
     inDollars = toggle.checked;
-    renderCars();
+    updateCars();
 };
+
 
 loader.style.display = "flex";
 
@@ -153,7 +194,7 @@ fetch("https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/dat
     .then(json => {
         originalData = json.cars.slice();
         currentData = originalData.slice();
-        renderCars();
+        if (document.getElementById("cars")) renderCars();
     })
     .catch(err => console.error("Ошибка загрузки JSON:", err))
     .finally(() => {
@@ -161,25 +202,43 @@ fetch("https://raw.githubusercontent.com/tcybkvv/dosbek_data/refs/heads/main/dat
     });
 
 // TOGGLE THEME
-
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('themeToggle');
-
-    if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark-theme');
-        themeToggle.checked = true;
+    if (themeToggle) {
+        if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark-theme');
+            themeToggle.checked = true;
+        }
+        themeToggle.addEventListener('change', () => {
+            document.documentElement.classList.toggle('dark-theme');
+            if (document.documentElement.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
     }
 
-    themeToggle.addEventListener('change', () => {
-        document.documentElement.classList.toggle('dark-theme');
-        if (document.documentElement.classList.contains('dark-theme')) {
-            localStorage.setItem('theme', 'dark');
-        } else {
-            localStorage.setItem('theme', 'light');
-        }
-    });
+    // BURGER MENU
+    const burger = document.querySelector('.menu__burger');
+    const nav = document.querySelector('.menu__nav');
+    if (burger && nav) {
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !burger.contains(e.target) && nav.classList.contains('active')) {
+                burger.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+    }
 });
 
-//FOOTER DATE
-
-document.getElementById("year").textContent = new Date().getFullYear();
+// FOOTER DATE
+const yearSpan = document.getElementById("year");
+if (yearSpan) yearSpan.textContent = new Date().getFullYear();

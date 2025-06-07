@@ -1,6 +1,7 @@
 :root {
     --background-primary: #ffffff;
     --background-secondary: #2e2727;
+    --background-tertiary: #ececec;
     --card-background: #ffffff;
     --text-primary: #000000;
     --text-secondary: #b3b3b3;
@@ -15,6 +16,7 @@
 
 .dark-theme {
     --background-primary: #1a1a1a;
+    --background-tertiary: #272727;
     --card-background: #2d2d2d;
     --text-primary: #e0e0e0;
     --border-color: #444444;
@@ -91,38 +93,52 @@ a {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--background-primary);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 99;
-    transition: opacity 0.3s ease;
-}
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    opacity: 1;
 
-.car {
-    &__body {
-        animation: shake 0.2s ease-in-out infinite alternate;
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
     }
 
-    &__line {
-        transform-origin: center right;
-        stroke-dasharray: 22;
-        animation: line 0.8s ease-in-out infinite;
-        animation-fill-mode: both;
-
-        &--top {
-            animation-delay: 0s;
+    .car {
+        &__body {
+            stroke: var(--text-primary);
+            animation: shake 0.2s ease-in-out infinite alternate;
         }
 
-        &--middle {
-            animation-delay: 0.2s;
+        &__wheel--left, &__wheel--right {
+            stroke: var(--text-primary);
+            fill: var(--background-primary);
         }
 
-        &--bottom {
-            animation-delay: 0.4s;
+        &__line {
+            stroke: var(--text-primary);
+            transform-origin: center right;
+            stroke-dasharray: 22;
+            animation: line 0.8s ease-in-out infinite;
+            animation-fill-mode: both;
+
+            &--top {
+                animation-delay: 0s;
+            }
+
+            &--middle {
+                animation-delay: 0.2s;
+            }
+
+            &--bottom {
+                animation-delay: 0.4s;
+            }
         }
     }
 }
+
 
 @keyframes shake {
     0% {
